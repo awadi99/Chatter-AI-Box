@@ -26,9 +26,23 @@ export default function Chats() {
 
     return (
         <div className="h-120">
-            <h3 className="text-lg mb-2 text-violet-400 text-left p-0.2 ">Chats</h3>
-            <div className="overflow-y-scroll h-full">
-                {chats.length > 0 ? (
+            <h3 className="text-lg mb-2 text-violet-400 text-left p-0.2">Chats</h3>
+            <div className="overflow-y-scroll h-full space-y-2">
+                <div className="mt-2 w-auto rounded-2xl">
+                    <div className="cursor-pointer w-full flex justify-between gap-3 p-2 bg-slate-700 rounded-2xl contrast-150">
+                        <div className="flex items-center gap-2 p-1">
+                            <img
+                                className="bg-cover h-15 rounded-2xl ring-success ring-offset-base-100 ring ring-offset-2"
+                                src="/img/icon/icon-removebg-preview.png"
+                                alt=""
+                            />
+                            <div className="p-1">
+                                <h1 className="text-[21px] font-light">Chatter Ai</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {chats.length > 0 &&
                     chats.map((ele, index) => (
                         <div key={index} className="mt-2 w-auto rounded-2xl">
                             <div className="cursor-pointer w-full flex justify-between gap-3 p-2 bg-slate-700 rounded-2xl contrast-150">
@@ -47,25 +61,9 @@ export default function Chats() {
                                 </div>
                             </div>
                         </div>
-                    ))
-                ) : (     <div className="mt-2 w-auto rounded-2xl">
-                            <div className="cursor-pointer w-full flex justify-between gap-3 p-2 bg-slate-700 rounded-2xl contrast-150">
-                                <div className="flex items-center gap-2 p-1">
-                                    <img
-                                        className="bg-cover h-15 rounded-full ring-success ring-offset-base-100 ring ring-offset-2"
-                                        src="/img/avatar.png"
-                                        alt=""
-                                    />
-                                    <div className="p-1">
-                                        <h1 className="text-[21px] font-light">hello</h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    
-                )}
+                    ))}
             </div>
-
         </div>
+
     );
 }

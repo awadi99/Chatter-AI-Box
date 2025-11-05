@@ -23,9 +23,9 @@ export default function Contacts() {
     }, []);
 
     return (
-        <div className="h-120">
+        <div className="h-150">
             <h3 className="text-lg mb-2 text-violet-400 text-left p-0.2 ">My contacts</h3>
-            <div className="overflow-y-scroll h-full ">{userData.length>0&&userData.map((ele, index) => (
+            <div className="overflow-y-auto h-full ">{userData.length>0&&userData.map((ele, index) => (
                 <div className="mt-2 w-auto  rounded-2xl">
                     <div className=" cursor-pointer w-full h-min-auto flex justify-between gap-3 p-2 bg-slate-700 rounded-2xl contrast-150">
                         <div className=" flex items-center gap-2 p-1">
