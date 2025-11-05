@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { toast, ToastContainer, Zoom } from "react-toastify";
 import { Link, useNavigate } from "react-router";
 import { LogOut, Volume2 } from "lucide-react";
-import { useEffect } from "react";
 function Profile() {
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
