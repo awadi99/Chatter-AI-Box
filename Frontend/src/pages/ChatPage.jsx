@@ -36,7 +36,7 @@ export default function ChatPage() {
               Chats
             </button>
           </div>
-          <div className="mt-5 ">
+          <div className="mt-4 ">
             {active === "contacts" && <Contacts />}
             {active === "chats" && <Chats />}
           </div>
