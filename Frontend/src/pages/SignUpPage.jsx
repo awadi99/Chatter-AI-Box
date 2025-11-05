@@ -153,8 +153,8 @@ export default function SignUpPage() {
               {/* Email */}
               <TextField
                 id="email"
-                type="email"
                 label="Email"
+                type='email'
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="JohnDoe@gmail.com"
