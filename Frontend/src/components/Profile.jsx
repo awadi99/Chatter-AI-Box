@@ -29,7 +29,7 @@ function Profile() {
 
     return (
         <div className=" h-auto w-auto   rounded-2xl">
-            <div className=" cursor-pointer w-full h-min-auto flex justify-between gap-3 p-2 bg-gray-700 rounded-2xl">
+            <div className=" cursor-pointer w-full h-min-auto flex justify-between gap-3 p-2 bg-slate-700 rounded-2xl contrast-150">
                 <div className=" flex items-center gap-2">
                     <img className=" bg-cover h-15 rounded-full ring-success ring-offset-base-100 ring ring-offset-2"  src="/img/avatar.png" alt="" />
                     <div className="p-1">

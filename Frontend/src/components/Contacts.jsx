@@ -27,8 +27,8 @@ export default function Contacts() {
             <h3 className="text-lg mb-2 text-violet-400 text-left p-0.2 ">My contacts</h3>
             <div className="overflow-y-scroll h-full ">{userData.map((ele, index) => (
                 <div className="mt-2 w-auto  rounded-2xl">
-                    <div className=" cursor-pointer w-full h-min-auto flex justify-between gap-3 p-2 bg-gray-700 rounded-2xl">
-                        <div className=" flex items-center gap-2">
+                    <div className=" cursor-pointer w-full h-min-auto flex justify-between gap-3 p-2 bg-slate-700 rounded-2xl contrast-150">
+                        <div className=" flex items-center gap-2 p-1">
                             <img className=" bg-cover h-15 rounded-full ring-success ring-offset-base-100 ring ring-offset-2" src="/img/avatar.png" alt="" />
                             <div className="p-1">
                                 <h1 className="text-[21px] font-light "key={index}>{ele.fullName}</h1>
