@@ -72,11 +72,16 @@ export default function ChatPage() {
 
         {/* Right Section */}
         <div className="p-5 md:w-[900px] flex flex-col justify-end">
+          <div className="flex flex-col justify-start "> 
+                <h1 className="w-full ">hello</h1>
+          </div>
+          <div>
           {active === "chats" ? (
             <Input/>
           ):(
             <img src="/img/login.png" alt="" className="w-full h-180 bg-cover" />
           )}
+        </div>
         </div>
       </div>
     </div>

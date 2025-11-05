@@ -25,7 +25,7 @@ export default function Chats() {
     }, []);
 
     return (
-        <div className="h-120 overflow-y-auto">
+        <div className="h-150">
             <h3 className="text-lg mb-2 text-violet-400 text-left p-0.2">Chats</h3>
             <div className="overflow-y-scroll h-full space-y-2">
                 <div className="mt-2 w-auto rounded-2xl">
