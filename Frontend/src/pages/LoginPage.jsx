@@ -2,7 +2,7 @@ import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { MessageCircle, User, Mail, KeyRound } from "lucide-react";
+import { Mail, KeyRound } from "lucide-react";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Link, useNavigate } from "react-router";
 import axios from "axios";
@@ -100,7 +100,7 @@ export default function LoginPage() {
         <div className="w-full md:w-1/2 p-10 md:p-10 flex items-center justify-center">
           <div className="w-full max-w-md">
             <div className="text-center mb-8">
-              <MessageCircle className="animate-bounce w-12 h-12 m-auto text-slate-400 mt-10 mb-7" />
+              <img src="/img/icon/icon-removebg-preview.png" className="animate-bounce w-20 h-20 m-auto text-slate-400 mt-10 mb-7 "alt="" />
               <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-7">
                 Welcome Back
               </h2>
