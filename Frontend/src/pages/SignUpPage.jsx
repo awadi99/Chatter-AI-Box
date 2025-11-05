@@ -65,17 +65,19 @@ export default function SignUpPage() {
     try {
       const res = await fetch("http://localhost:3000/api/auth/signup", {
         method: "POST",
-        credentials:"include",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData)
       });
       const data = await res.json();
-      localStorage.setItem("user", JSON.stringify(data));
 
       if (res.ok) {
+        localStorage.setItem("user", JSON.stringify(data));
+
         toast.success(data.msg || "Signup successful!", {
+
           onClose: () => navigate("/"),
         });
         dispatch(login(data));
@@ -151,6 +153,7 @@ export default function SignUpPage() {
               {/* Email */}
               <TextField
                 id="email"
+                type="email"
                 label="Email"
                 value={formData.email}
                 onChange={handleChange}
