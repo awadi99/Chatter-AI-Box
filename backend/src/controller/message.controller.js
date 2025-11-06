@@ -1,6 +1,24 @@
+import { response } from 'express';
 import cloudinary from '../lib/cloudinary.js';
 import MessageData from '../model/Message.js'
 import NewUser from '../model/User.js'
+import axios from 'axios';
+import dotenv from 'dotenv';
+import path from "path";
+import { fileURLToPath } from "url";
+import { InferenceClient } from "@huggingface/inference";
+
+
+
+
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+
+const KEY = process.env.HF_TOKEN;
 
 
 
@@ -60,6 +78,7 @@ export const getMessages = async (req, res) => {
     }
 };
 
+
 export const sendMessage = async (req, res) => {
     try {
         const { text, image } = req.body;
@@ -87,3 +106,43 @@ export const sendMessage = async (req, res) => {
         res.status(500).json({ msg: "Internal server problem" });
     }
 }
+
+// set up ai google /gemma-2-2b-it
+const client = new InferenceClient(process.env.HF_TOKEN);
+export const sendReply = async (req, res) => {
+    try {
+        const { message } = req.body;
+
+        
+        if (!message) {
+            return res.status(400).json({ reply: "Please send a message." });
+        }
+
+        let out = "";
+
+
+        const stream = await client.chatCompletionStream({
+            model: "google/gemma-2-2b-it", 
+            messages: [
+                {
+                    role: "user",
+                    content: message,
+                },
+            ],
+        });
+
+        
+        for await (const chunk of stream) {
+            if (chunk.choices && chunk.choices.length > 0) {
+                const newContent = chunk.choices[0].delta?.content || "";
+                out += newContent;
+            }
+        }
+        res.status(200).json({ reply: out || "Sorry, I didn’t understand that." });
+
+    } catch (error) {
+        console.error("HuggingFace Streaming Error:", error.message);
+        res.status(500).json({ reply: "AI error", details: error.message });
+    }
+};
+

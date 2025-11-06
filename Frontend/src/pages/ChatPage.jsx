@@ -1,7 +1,6 @@
 import { ToastContainer, Zoom } from "react-toastify";
 import Profile from "../components/Profile.jsx";
 import Contacts from "../components/Contacts.jsx";
-// import Chats from "../components/Chats.jsx";
 import { } from '../../redux/slice.js';
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";

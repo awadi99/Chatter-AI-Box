@@ -20,7 +20,10 @@
   "dependencies": {
     "@arcjet/inspect": "^1.0.0-beta.13",
     "@arcjet/node": "^1.0.0-beta.13",
+    "@huggingface/inference": "^4.13.1",
+    "axios": "^1.13.2",
     "bcryptjs": "^3.0.2",
+    "body-parser": "^2.2.0",
     "cloudinary": "^2.8.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -28,6 +31,7 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.1",
+    "node-fetch": "^3.3.2",
     "resend": "^6.2.2"
   },
   "devDependencies": {
