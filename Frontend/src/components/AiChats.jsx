@@ -37,7 +37,11 @@ const [text, SetText] = useState({
     }
 
     return (
-        <>
+        <>     
+        <h1 className="text-center text-purple-600 font-medium animate-bounce">
+            👋 Hello, I am Chatter Ai
+        </h1>
+
                 {/* Chat display */}
                 <div className="w-full  mb-4 p-4  border-purple-800 rounded-2xl h-[650px] overflow-y-scroll flex flex-col gap-2">
                     {message.map((ele, index) => (

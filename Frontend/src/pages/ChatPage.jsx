@@ -9,16 +9,20 @@ import Chats from "../components/Chats.jsx";
 import Input from "../components/Input.jsx";
 import { AiChats } from "../components/AiChats.jsx";
 
+
+
+
 export default function ChatPage() {
   const user = useSelector((state) => state.auth.isLoggedIn);
   const navigate = useNavigate();
-  const [active, setActive] = useState("contacts");
+  const [active, setAct] = useState("contacts");
   useEffect(() => {
     if (!user) {
       navigate('/login');
     }
   }, [user, navigate]);
-
+  const Activity = useSelector((state) => state.Activity.activity);
+  console.log(Activity);
   return (
     <div className="animate-border relative w-full max-w-6xl h-[500] mx-auto p-2">
       <div className="flex flex-col md:flex-row h-full ">
@@ -29,7 +33,7 @@ export default function ChatPage() {
 
           <div className="flex gap-3">
             <button
-              onClick={() => setActive("contacts")}
+              onClick={() => setAct("contacts")}
               className={`w-full border text-sm font-medium px-3 py-2 rounded-2xl text-center transition-all
             ${active === "contacts" ? "bg-violet-500 text-white" : "border-violet-500 text-violet-400"}
             hover:bg-violet-600 hover:text-white`}
@@ -37,7 +41,7 @@ export default function ChatPage() {
               Contacts
             </button>
             <button
-              onClick={() => setActive("chats")}
+              onClick={() => setAct("chats")}
               className={`w-full border text-sm font-medium px-3 py-2 rounded-2xl text-center transition-all
             ${active === "chats" ? "bg-violet-500 text-white" : "border-violet-500 text-violet-400"}
             hover:bg-violet-600 hover:text-white`}
@@ -72,17 +76,17 @@ export default function ChatPage() {
 
         {/* Right Section */}
         <div className="p-4 md:w-[900px] flex flex-col justify-end">
-          <div className="flex flex-col justify-start "> 
-            <h1 className="text-center text-purple-600 font-medium animate-bounce" >👋hello i am Chatter Ai </h1>
-          </div>
           <div>
-          {active === "chats" ? (
-            <AiChats/> 
-          ):(
-            <img src="/img/login.png" alt="" className="w-full h-180 bg-cover" />
-          )}
+            {active === "chats" && Activity === "ai" ? (
+              <AiChats />
+            ) : active === "chats" && Activity !== "ai" ? (
+              <Input />
+            ) : active === "contacts" ? (
+              <img src="img/login.png" alt="placeholder" />
+            ) : null}
+          </div>
         </div>
-        </div>
+
       </div>
     </div>
 

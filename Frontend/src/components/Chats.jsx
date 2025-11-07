@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { HelpCircle } from 'lucide-react';
+import { setActive } from '../../redux/chatSlice.js';
+import { useDispatch } from 'react-redux';
 
 export default function Chats() {
     const [chats, setChats] = useState([]);
+    const dispatch = useDispatch();
     const data = JSON.parse(localStorage.getItem("user"));
-    const id=data._id;
+    const id = data._id;
     console.log(id);
     useEffect(() => {
         const getChat = async () => {
@@ -24,12 +26,22 @@ export default function Chats() {
         getChat();
     }, []);
 
+
+    const sendActive = () => {
+        let a = dispatch(setActive("ai"));
+        console.log(a);
+    }
+
     return (
         <div className="h-150">
             <h3 className="text-lg mb-2 text-violet-400 text-left p-0.2">Chats</h3>
             <div className="overflow-y-scroll h-full space-y-2">
-                <div className="mt-2 w-auto rounded-2xl">
-                    <div className="cursor-pointer w-full flex justify-between gap-3 p-2 bg-slate-700 rounded-2xl contrast-150">
+                <div
+                    className={`mt-2 w-auto rounded-2xl cursor-pointer text-violet-400
+                    transition-all hover:text-purple-500 active:border border-purple-800`}
+                    onClick={sendActive}
+                >
+                    <div className="w-full flex justify-between gap-3 p-2 bg-slate-700 rounded-2xl contrast-150">
                         <div className="flex items-center gap-2 p-1">
                             <img
                                 className="bg-cover h-15 rounded-2xl ring-success ring-offset-base-100 ring ring-offset-2"
@@ -37,7 +49,7 @@ export default function Chats() {
                                 alt=""
                             />
                             <div className="p-1">
-                                <h1 className="text-[21px] font-light">Chatter Ai</h1>
+                                <h1 className="text-[21px] font-medium animate-pulse">Chatter Ai</h1>
                             </div>
                         </div>
                     </div>
@@ -67,3 +79,4 @@ export default function Chats() {
 
     );
 }
+
