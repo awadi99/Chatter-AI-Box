@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import Chats from "../components/Chats.jsx";
 import Input from "../components/Input.jsx";
+import { AiChats } from "../components/AiChats.jsx";
 
 export default function ChatPage() {
   const user = useSelector((state) => state.auth.isLoggedIn);
@@ -70,13 +71,13 @@ export default function ChatPage() {
         </div>
 
         {/* Right Section */}
-        <div className="p-5 md:w-[900px] flex flex-col justify-end">
+        <div className="p-4 md:w-[900px] flex flex-col justify-end">
           <div className="flex flex-col justify-start "> 
-                <h1 className="w-full ">hello</h1>
+            <h1 className="text-center text-purple-600 font-medium animate-bounce" >👋hello i am Chatter Ai </h1>
           </div>
           <div>
           {active === "chats" ? (
-            <Input/>
+            <AiChats/> 
           ):(
             <img src="/img/login.png" alt="" className="w-full h-180 bg-cover" />
           )}
