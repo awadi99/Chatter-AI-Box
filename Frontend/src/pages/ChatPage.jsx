@@ -10,8 +10,6 @@ import Input from "../components/Input.jsx";
 import { AiChats } from "../components/AiChats.jsx";
 
 
-
-
 export default function ChatPage() {
   const user = useSelector((state) => state.auth.isLoggedIn);
   const navigate = useNavigate();

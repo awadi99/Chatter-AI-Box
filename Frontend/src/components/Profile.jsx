@@ -5,7 +5,11 @@ import { useDispatch } from "react-redux";
 import { toast, ToastContainer, Zoom } from "react-toastify";
 import { Link, useNavigate } from "react-router";
 import { LogOut, Volume2 } from "lucide-react";
+import { useState ,useRef } from "react";
+
 function Profile() {
+
+
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -27,11 +31,31 @@ function Profile() {
         }
     }
 
+    const [update,updateProfile] = useState({
+        profileImg:null,
+    });
+
+    const [Image,setImage] = useState(null);
+
+    const fileInputRef = useRef(null);
+
+
+
+
+
     return (
         <div className=" h-auto w-auto   rounded-2xl">
             <div className=" cursor-pointer w-full h-min-auto flex justify-between gap-3 p-2 bg-slate-700 rounded-2xl contrast-150">
-                <div className=" flex items-center gap-2">
-                    <img className=" bg-cover h-15 rounded-full ring-success ring-offset-base-100 ring ring-offset-2"  src="/img/avatar.png" alt="" />
+                    <div className=" flex items-center gap-2">
+                    <div className="avatar avatar-online ring-success ring-offset-black rounded-full ring-2 ring-offset-2">
+                        <button className="size-15 rounded-full overflow-hidden relative group" onClick={()=>fileInputRef.current.click()}>
+                        <img src={user?.profilePic||userLogin?.profilePic||"/img/avatar.png"} alt="" className="object-cover size-full"/>
+                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                        <span className="text-white text-xs">Change</span>
+                        </div>
+                        </button>
+                        <input type="file" accept="image/*" className="hidden" name="" id="" ref={fileInputRef} />
+                    </div>
                     <div className="p-1">
                         <h1 className="text-[21px] font-light ">{user?.fullName || userLogin?.fullName}</h1>
                         <p className="text-[13px] mt-1 font-extralight opacity-60 hover:opacity-100 transition-all">online  </p>
