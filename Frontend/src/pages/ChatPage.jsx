@@ -20,7 +20,6 @@ export default function ChatPage() {
     }
   }, [user, navigate]);
   const Activity = useSelector((state) => state.Activity.activity);
-  console.log(Activity);
   return (
     <div className="animate-border relative w-full max-w-6xl h-[500] mx-auto p-2">
       <div className="flex flex-col md:flex-row h-full ">

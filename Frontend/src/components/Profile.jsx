@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { toast, ToastContainer, Zoom } from "react-toastify";
 import { Link, useNavigate } from "react-router";
 import { LogOut, Volume2 } from "lucide-react";
-import { useState ,useRef } from "react";
+import { useState, useRef } from "react";
 
 function Profile() {
 
@@ -13,7 +13,7 @@ function Profile() {
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const userLogin =JSON.parse(localStorage.getItem("user"));
+    const userLogin = JSON.parse(localStorage.getItem("user"));
 
     const logOut1 = async (e) => {
         e.preventDefault();
@@ -30,31 +30,49 @@ function Profile() {
             toast.error("Server error");
         }
     }
-
-    const [update,updateProfile] = useState({
-        profileImg:null,
-    });
-
-    const [Image,setImage] = useState(null);
-
+    const [Image, setImage] = useState(null);
     const fileInputRef = useRef(null);
 
 
+    const handValue = async (event) => {
+        const file = event.target.files[0];
+        if (!file) {
+            toast.error("Please select an image first");
+            return;
+        }
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = async () => {
+            const base64Image = reader.result;
+            console.log(base64Image);
+            setImage(base64Image);
 
+            try {
+                const res = await axios.put("http://localhost:3000/api/auth/update-profile",
+                    {profilePic: base64Image},
+                    {withCredentials: true}
 
-
+                );
+                toast.success(res.data || "Upload Success");
+                setImage(null)
+            } catch (err) {
+                console.error(err);
+                toast.error(err.response?.data?.msg || "Server Error");
+            }
+        }
+    }
     return (
         <div className=" h-auto w-auto   rounded-2xl">
             <div className=" cursor-pointer w-full h-min-auto flex justify-between gap-3 p-2 bg-slate-700 rounded-2xl contrast-150">
-                    <div className=" flex items-center gap-2">
+                <div className=" flex items-center gap-2">
                     <div className="avatar avatar-online ring-success ring-offset-black rounded-full ring-2 ring-offset-2">
-                        <button className="size-15 rounded-full overflow-hidden relative group" onClick={()=>fileInputRef.current.click()}>
-                        <img src={user?.profilePic||userLogin?.profilePic||"/img/avatar.png"} alt="" className="object-cover size-full"/>
-                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                        <span className="text-white text-xs">Change</span>
-                        </div>
+                        <button className="size-15 rounded-full overflow-hidden relative group" onClick={() => fileInputRef.current.click()}>
+                            <img src={Image || user?.profilePic || userLogin?.profilePic || "/img/avatar.png"} alt="" className="object-cover size-full" />
+                            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                                <span className="text-white text-xs">Change</span>
+                            </div>
                         </button>
-                        <input type="file" accept="image/*" className="hidden" name="" id="" ref={fileInputRef} />
+                        <input type="file" accept="image/*" className="hidden" name="" id="" ref={fileInputRef} onChange={handValue} />
                     </div>
                     <div className="p-1">
                         <h1 className="text-[21px] font-light ">{user?.fullName || userLogin?.fullName}</h1>
@@ -70,6 +88,19 @@ function Profile() {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                transition={Zoom}
+            />
         </div>
     )
 }
