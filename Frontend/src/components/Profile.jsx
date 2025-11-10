@@ -4,7 +4,7 @@ import { logout } from '.././../redux/slice.js'
 import { useDispatch } from "react-redux";
 import { toast, ToastContainer, Zoom } from "react-toastify";
 import { Link, useNavigate } from "react-router";
-import { LogOut, Volume2 } from "lucide-react";
+import { LogOut, MousePointerClick, Volume2 ,VolumeOff} from "lucide-react";
 import { useState, useRef } from "react";
 
 function Profile() {
@@ -25,6 +25,8 @@ function Profile() {
                 });
             }
             dispatch(logout(res.data));
+            Sound("/sound/mouse-click.mp3",true);
+
         } catch (err) {
             console.error("server error", err);
             toast.error("Server error");
@@ -46,6 +48,7 @@ function Profile() {
             const base64Image = reader.result;
             console.log(base64Image);
             setImage(base64Image);
+            Sound("/sound/mouse-click.mp3")
 
             try {
                 const res = await axios.put("http://localhost:3000/api/auth/update-profile",
@@ -60,6 +63,30 @@ function Profile() {
                 toast.error(err.response?.data?.msg || "Server Error");
             }
         }
+    }
+    // sound effect
+    const [isSoundEnable,setToggleSound] = useState(null);
+
+    const Sound =(src,alwaysPlay = false)=>{
+        if(!isSoundEnable && ! alwaysPlay)return;
+        const sound = new Audio(src);
+        sound.currentTime =0;
+        sound.volume = 1;
+        sound.play().catch((err)=>console.log("Autoplay Blocked ", err));
+    }
+
+    const toggleSound=()=>{
+        if(isSoundEnable){
+            Sound("/sound/mouse-click.mp3")
+            setToggleSound(false);
+
+        }else{
+            setToggleSound(true)
+            Sound("/sound/mouse-click.mp3")
+        }
+        // const newState = !isSoundEnable;
+        // setToggleSound(newState);
+        // Sound("/sound/mouse-click.mp3",true);
     }
     return (
         <div className=" h-auto w-auto   rounded-2xl">
@@ -83,9 +110,15 @@ function Profile() {
                     <div className="p-1 translate-2 h-8 w-auto opacity-40 hover:opacity-100   rounded-[50%]  transition-all duration-600 cursor-pointer bg-gray-600 flex items-center justify-center">
                         <LogOut onClick={logOut1} />
                     </div>
-                    <div className="mr-2 p-1 translate-2 h-8 w-auto opacity-40 hover:opacity-100   rounded-[50%]  transition-all duration-600 cursor-pointer bg-gray-600 flex items-center justify-center">
-                        <Volume2 />
-                    </div>
+                    <button className="mr-2 p-1 translate-2 h-8 w-auto opacity-40 hover:opacity-100   rounded-[50%]  transition-all duration-600 cursor-pointer bg-gray-600 flex items-center justify-center"
+                        onClick={toggleSound}>
+                        {!isSoundEnable ? (
+                            <Volume2 />
+                        ) : (
+                            <VolumeOff />
+                        )
+                        }
+                    </button>
                 </div>
             </div>
             <ToastContainer
