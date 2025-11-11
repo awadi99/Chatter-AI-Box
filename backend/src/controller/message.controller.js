@@ -67,10 +67,9 @@ export const getChatProfile=async(req,res)=>{
         const {id}=req.params;
         const chatProfile = await NewUser.findOne({_id:id}).select("-password");
         if(!chatProfile){
-            res.status(401).json({msg:"User is not found"})
+            return res.status(404).json({msg:"User not found"})
         }
-        res.status(200).json(chatProfile);
-    }catch(err){
+        res.status(200).json(chatProfile);    }catch(err){
         console.error("Error in getChatProfile");
         res.status(500).json({msg:"Internal server problem"});
     }

@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/contacts",protectRoute,getAllContacts);
 router.get("/chats",protectRoute,getAllChats);
-router.get("/chats/:id",getChatProfile);
+router.get("/chats/:id",protectRoute,getChatProfile);
 router.get("/:id",protectRoute,getMessages);
 router.post("/send/:id",protectRoute,sendMessage);
 router.post("/ai",sendReply);
