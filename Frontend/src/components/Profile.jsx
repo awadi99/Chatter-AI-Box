@@ -4,7 +4,7 @@ import { logout } from '.././../redux/slice.js'
 import { useDispatch } from "react-redux";
 import { toast, ToastContainer, Zoom } from "react-toastify";
 import { Link, useNavigate } from "react-router";
-import { LogOut, MousePointerClick, Volume2 ,VolumeOff} from "lucide-react";
+import { LogOut,Volume2 ,VolumeOff} from "lucide-react";
 import { useState, useRef } from "react";
 
 function Profile() {

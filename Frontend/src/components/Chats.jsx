@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { setActive } from '../../redux/chatSlice.js';
 import { useDispatch } from 'react-redux';
+import {getChatId} from './../../redux/chatID.js'
 
 export default function Chats() {
     const [chats, setChats] = useState([]);
@@ -32,6 +33,12 @@ export default function Chats() {
         console.log(a);
     }
 
+    const sendActiveChatId = (useid) => {
+        let a = dispatch(setActive("user"));
+        console.log(a);
+        dispatch(getChatId(useid))
+    }
+
     return (
         <div className="h-150">
             <h3 className="text-lg mb-2 text-violet-400 text-left p-0.2">Chats</h3>
@@ -56,7 +63,7 @@ export default function Chats() {
                 </div>
                 {chats.length > 0 &&
                     chats.map((ele, index) => (
-                        <div key={index} className="mt-2 w-auto rounded-2xl">
+                        <div key={index} className="mt-2 w-auto rounded-2xl" onClick={()=>sendActiveChatId(ele._id)}>
                             <div className="cursor-pointer w-full flex justify-between gap-3 p-2 bg-slate-700 rounded-2xl contrast-150">
                                 <div className="flex items-center gap-2 p-1">
                                     <div className="avatar ring-offset-purple-900  rounded-full ring-2 ring-offset-2 ">
@@ -65,7 +72,7 @@ export default function Chats() {
                                         </div>
                                     </div>
                                     <div className="p-1">
-                                        <h1 className="text-[21px] font-light  hover:text-purple-400 transition-colors">{ele.fullName}</h1>
+                                        <h1 className="text-[21px] font-light  hover:text-purple-400 transition-colors">{ele.fullName }</h1>
                                         <p className="text-[13px] mt-1 font-extralight opacity-60 hover:opacity-100 transition-all">
                                             online
                                         </p>

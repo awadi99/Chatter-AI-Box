@@ -76,7 +76,7 @@ export default function ChatPage() {
           <div>
             {active === "chats" && Activity === "ai" ? (
               <AiChats />
-            ) : active === "chats" && Activity !== "ai" ? (
+            ) : active === "chats" && Activity == "user" ? (
               <Input />
             ) : active === "contacts" ? (
               <img src="img/login.png" alt="placeholder" />
