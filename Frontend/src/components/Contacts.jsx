@@ -25,7 +25,7 @@ export default function Contacts() {
     return (
         <div className="h-160">
             <h3 className="text-lg mb-2 text-violet-400 text-left p-0.2 ">My contacts</h3>
-            <div className="overflow-y-auto h-full ">{userData.length>0&&userData.map((ele, index) => (
+            <div className="overflow-y-auto h-full  ">{userData.length>0&&userData.map((ele, index) => (
                 <div className="mt-2 w-auto  rounded-2xl">
                     <div className=" cursor-pointer w-full h-min-auto flex justify-between gap-3 p-2 bg-slate-700 rounded-2xl contrast-150">
                         <div className=" flex items-center gap-2 p-1 ">
@@ -35,7 +35,7 @@ export default function Contacts() {
                                 </div>
                             </div>
                             <div className="p-2">
-                                <h1 className="text-[21px] font-light "key={index}>{ele.fullName}</h1>
+                                <h1 className="text-[21px] font-light  hover:text-purple-400 transition-colors "key={index}>{ele.fullName}</h1>
                                 <p className="text-[13px] mt-1 font-extralight opacity-60 hover:opacity-100 transition-all">online  </p>
                             </div>
                         </div>

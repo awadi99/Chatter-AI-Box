@@ -65,7 +65,7 @@ export default function Chats() {
                                         </div>
                                     </div>
                                     <div className="p-1">
-                                        <h1 className="text-[21px] font-light">{ele.fullName}</h1>
+                                        <h1 className="text-[21px] font-light  hover:text-purple-400 transition-colors">{ele.fullName}</h1>
                                         <p className="text-[13px] mt-1 font-extralight opacity-60 hover:opacity-100 transition-all">
                                             online
                                         </p>

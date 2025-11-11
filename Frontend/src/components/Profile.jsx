@@ -94,7 +94,7 @@ function Profile() {
                 <div className=" flex items-center gap-2">
                     <div className="avatar avatar-online ring-success ring-offset-black rounded-full ring-2 ring-offset-2">
                         <button className="size-15 rounded-full overflow-hidden relative group" onClick={() => fileInputRef.current.click()}>
-                            <img src={Image || user?.profilePic || userLogin?.profilePic || "/img/avatar.png"} alt="" className="object-cover size-full" />
+                            <img src={Image || user?.profilePic || userLogin?.profilePic || "/img/avat4r.png"} alt="" className="object-cover size-full" />
                             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                                 <span className="text-white text-xs">Change</span>
                             </div>
@@ -102,7 +102,7 @@ function Profile() {
                         <input type="file" accept="image/*" className="hidden" name="" id="" ref={fileInputRef} onChange={handValue} />
                     </div>
                     <div className="p-1">
-                        <h1 className="text-[21px] font-light ">{user?.fullName || userLogin?.fullName}</h1>
+                        <h1 className="text-[21px] font-light hover:text-purple-400 transition-colors ">{user?.fullName || userLogin?.fullName}</h1>
                         <p className="text-[13px] mt-1 font-extralight opacity-60 hover:opacity-100 transition-all">online  </p>
                     </div>
                 </div>
