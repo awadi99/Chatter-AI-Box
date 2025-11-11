@@ -4,7 +4,7 @@ import { logout } from '.././../redux/slice.js'
 import { useDispatch } from "react-redux";
 import { toast, ToastContainer, Zoom } from "react-toastify";
 import { Link, useNavigate } from "react-router";
-import { LogOut,Volume2 ,VolumeOff} from "lucide-react";
+import { LogOut, Volume2, VolumeOff } from "lucide-react";
 import { useState, useRef } from "react";
 
 function Profile() {
@@ -25,7 +25,7 @@ function Profile() {
                 });
             }
             dispatch(logout(res.data));
-            Sound("/sound/mouse-click.mp3",true);
+            Sound("/sound/mouse-click.mp3", true);
 
         } catch (err) {
             console.error("server error", err);
@@ -52,8 +52,8 @@ function Profile() {
 
             try {
                 const res = await axios.put("http://localhost:3000/api/auth/update-profile",
-                    {profilePic: base64Image},
-                    {withCredentials: true}
+                    { profilePic: base64Image },
+                    { withCredentials: true }
 
                 );
                 toast.success(res.data || "Upload Success");
@@ -65,22 +65,22 @@ function Profile() {
         }
     }
     // sound effect
-    const [isSoundEnable,setToggleSound] = useState(null);
+    const [isSoundEnable, setToggleSound] = useState(null);
 
-    const Sound =(src,alwaysPlay = false)=>{
-        if(!isSoundEnable && ! alwaysPlay)return;
+    const Sound = (src, alwaysPlay = false) => {
+        if (!isSoundEnable && !alwaysPlay) return;
         const sound = new Audio(src);
-        sound.currentTime =0;
+        sound.currentTime = 0;
         sound.volume = 1;
-        sound.play().catch((err)=>console.log("Autoplay Blocked ", err));
+        sound.play().catch((err) => console.log("Autoplay Blocked ", err));
     }
 
-    const toggleSound=()=>{
-        if(isSoundEnable){
+    const toggleSound = () => {
+        if (isSoundEnable) {
             Sound("/sound/mouse-click.mp3")
             setToggleSound(false);
 
-        }else{
+        } else {
             setToggleSound(true)
             Sound("/sound/mouse-click.mp3")
         }
@@ -101,10 +101,19 @@ function Profile() {
                         </button>
                         <input type="file" accept="image/*" className="hidden" name="" id="" ref={fileInputRef} onChange={handValue} />
                     </div>
-                    <div className="p-1">
-                        <h1 className="text-[21px] font-light hover:text-purple-400 transition-colors ">{user?.fullName || userLogin?.fullName}</h1>
-                        <p className="text-[13px] mt-1 font-extralight opacity-60 hover:opacity-100 transition-all">online  </p>
+                    <div className="p-2">
+                        <h1
+                            className="-mt-2 text-[20px] font-semibold tracking-wide
+                            bg-gradient-to-r from-purple-500 via-fuchsia-500 to-blue-500 
+                            bg-[length:200%_200%] animate-gradient text-transparent bg-clip-text"
+                        >
+                            {user?.fullName||userLogin?.fullName}
+                        </h1>
+                        <p className="text-[13px] mt-1 font-extralight opacity-60 hover:opacity-100 transition-all">
+                            online
+                        </p>
                     </div>
+
                 </div>
                 <div className="flex justify-around gap-3">
                     <div className="p-1 translate-2 h-8 w-auto opacity-40 hover:opacity-100   rounded-[50%]  transition-all duration-600 cursor-pointer bg-gray-600 flex items-center justify-center">

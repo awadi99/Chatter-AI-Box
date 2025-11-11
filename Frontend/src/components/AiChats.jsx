@@ -1,7 +1,10 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { toast, Zoom, ToastContainer } from 'react-toastify';
-import { Send } from 'lucide-react';
+import { Send, X } from 'lucide-react';
+import { getChatId } from './../../redux/chatID.js'
+import { setActive } from './../../redux/chatSlice.js'
+import { useDispatch } from 'react-redux';
 
 export function AiChats() {
     const [text, SetText] = useState({
@@ -36,14 +39,40 @@ export function AiChats() {
         }
     }
 
+    const dispatch = useDispatch();
+    const crossFunction = (value) => {
+        dispatch(setActive(value));
+        dispatch(getChatId(value));
+    }
+
     return (
         <>
-            <h1 className="text-center text-purple-600 font-medium animate-bounce">
-                👋 Hello, I am Chatter Ai
-            </h1>
+        <div className='h-[650px]'>
+            <div
+                className={` p-3 mt-2 w-auto rounded-2xl cursor-pointer text-violet-400
+                    transition-all hover:text-purple-500`}
+            >
+                <div className="w-full flex justify-between gap-3 p-3 bg-slate-700 rounded-2xl contrast-150">
+                    <div className="flex items-center gap-2 p-1">
+                        <img
+                            className="bg-cover h-15 rounded-2xl ring-success ring-offset-base-100 ring ring-offset-2"
+                            src="/img/icon/icon-removebg-preview.png"
+                            alt=""
+                        />
+                                <h1 className="p-6 absolute left-20 top-1 text-2xl font-semibold tracking-wide
+                                bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 
+                                bg-[length:200%_200%] animate-gradient text-transparent bg-clip-text">
+                                    Chatter AI
+                                </h1>
+                    </div>
+                        <X
+                            className="mr-6 mt-4  hover:animate-spin cursor-pointer text-purple-400 hover:text-purple-500 transition-transform duration-300 hover:scale-110"
+                            onClick={() => crossFunction(null)}
+                        />                </div>
+            </div>
 
             {/* Chat display */}
-            <div className="w-full  mb-4 p-4  border-purple-800 rounded-2xl h-[650px] overflow-y-scroll flex flex-col gap-2">
+            <div className="w-full  mb-4 p-4  border-purple-800 rounded-2xl h-[564px] overflow-y-scroll flex flex-col gap-2">
                 {message.map((ele, index) => (
                     <div
                         key={index}
@@ -56,7 +85,7 @@ export function AiChats() {
                     </div>
                 ))}
             </div>
-            <div className=''>
+            <div className="mt-15">
                 <form aciton="" onSubmit={sendValue}>
                     <div className={`display flex flex-row justify-between text-[20px] w-full px-5 py-2 h-[40px] rounded-2xl border text-sm font-medium
                 border-violet-500 text-violet-400 
@@ -88,6 +117,7 @@ export function AiChats() {
                     theme="dark"
                     transition={Zoom}
                 />
+            </div>
             </div>
         </>
     )

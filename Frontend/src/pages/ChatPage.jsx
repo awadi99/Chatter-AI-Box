@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Chats from "../components/Chats.jsx";
 import Input from "../components/Input.jsx";
 import { AiChats } from "../components/AiChats.jsx";
+import Animations from "../components/Animation.jsx";
 
 
 export default function ChatPage() {
@@ -21,7 +22,7 @@ export default function ChatPage() {
   }, [user, navigate]);
   const Activity = useSelector((state) => state.Activity.activity);
   return (
-    <div className="animate-border relative w-full max-w-6xl h-[500] mx-auto p-2">
+    <div className="animate-border relative w-full max-w-6xl h-[190]  mx-auto p-2">
       <div className="flex flex-col md:flex-row h-full ">
 
         {/* Left Section */}
@@ -72,14 +73,16 @@ export default function ChatPage() {
         </div>
 
         {/* Right Section */}
-        <div className="p-4 md:w-[900px] flex flex-col justify-end">
+        <div className="p-4 h-full md:w-[950px] flex flex-col justify-center">
           <div>
             {active === "chats" && Activity === "ai" ? (
               <AiChats />
             ) : active === "chats" && Activity == "user" ? (
               <Input />
-            ) : active === "contacts" ? (
-              <img src="img/login.png" alt="placeholder" />
+            ) : active==="contacts" ||Activity === null ? (
+              <div>
+                <Animations/>
+              </div> 
             ) : null}
           </div>
         </div>

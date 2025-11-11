@@ -23,9 +23,12 @@ export default function Contacts() {
     }, []);
 
     return (
-        <div className="h-160">
-            <h3 className="text-lg mb-2 text-violet-400 text-left p-0.2 ">My contacts</h3>
-            <div className="overflow-y-auto h-full  ">{userData.length>0&&userData.map((ele, index) => (
+        <>
+        <div >
+        <h3 className="z-100 text-lg mb-2 text-violet-400 text-left p-0.2">My contacts</h3>
+        </div>
+        <div className="h-160 overflow-y-scroll">
+            <div className="h-full">{userData.length>0&&userData.map((ele, index) => (
                 <div className="mt-2 w-auto  rounded-2xl">
                     <div className=" cursor-pointer w-full h-min-auto flex justify-between gap-3 p-2 bg-slate-700 rounded-2xl contrast-150">
                         <div className=" flex items-center gap-2 p-1 ">
@@ -34,16 +37,25 @@ export default function Contacts() {
                                     <img src={ele.profilePic || "/img/avatar.png"} alt="" className="object-cover size-full" />
                                 </div>
                             </div>
-                            <div className="p-2">
-                                <h1 className="text-[21px] font-light  hover:text-purple-400 transition-colors "key={index}>{ele.fullName}</h1>
-                                <p className="text-[13px] mt-1 font-extralight opacity-60 hover:opacity-100 transition-all">online  </p>
-                            </div>
+                                        <div className="p-2">
+                                            <h1
+                                                key={index}
+                                                className="-mt-2 text-[20px] font-semibold tracking-wide
+                                                    bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 
+                                                    bg-[length:200%_200%] animate-gradient text-transparent bg-clip-text"
+                                            >
+                                                {ele?.fullName}
+                                            </h1>
+                                            <p className=" text-[13px] mt-1 font-extralight opacity-60 hover:opacity-100 transition-all">
+                                                online{" "}
+                                            </p>
+                                        </div>
                         </div>
                     </div>
                 </div>
             ))}
             </div>
-
         </div>
+        </>
     );
 }
