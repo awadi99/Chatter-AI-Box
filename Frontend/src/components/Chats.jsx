@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { setActive } from "../../redux/chatSlice.js";
 import { useDispatch } from "react-redux";
 import { getChatId } from "./../../redux/chatID.js";
+import ScrollAnimation from "./ScrollAnimation.jsx";
 
 export default function Chats() {
     const [chats, setChats] = useState([]);
@@ -47,7 +48,7 @@ export default function Chats() {
                 <h3 className="text-lg mb-2 text-violet-400 text-left p-0.2">Chats</h3>
             </div>
             <div className="h-160">
-                <div className="overflow-y-scroll h-full space-y-2">
+                <ScrollAnimation className="h-full space-y-2">
                     <div
                         className={`mt-2 w-auto rounded-2xl cursor-pointer text-violet-400
                     transition-all hover:text-purple-500 active:border border-purple-800`}
@@ -104,7 +105,7 @@ export default function Chats() {
                                 </div>
                             </div>
                         ))}
-                </div>
+                </ScrollAnimation>
             </div>
         </>
     );

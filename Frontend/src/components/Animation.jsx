@@ -1,5 +1,4 @@
-import React from "react";
-import "/src/index.css"; // contains keyframes and animation classes
+import "/src/index.css"; 
 
 const Animations = () => {
     const boxes = [
@@ -86,7 +85,7 @@ const Animations = () => {
                         <div
                             key={index}
                             className={`flex items-center justify-center 
-                w-20 h-20 sm:w-20 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 
+                w-20 h-20 sm:w-20 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32  
                 ${box.className}`}
                         >
                             <img
@@ -94,10 +93,10 @@ const Animations = () => {
                                 alt={box.name}
                                 className={`object-contain w-10 h-10 sm:w-20 sm:h-20 md:w-24 md:h-24 
                                 opacity-90 hover:opacity-100 transition-all duration-700 
-                                rounded-2xl shadow-2xl ${shadowColor}`}
+                                rounded-2xl shadow-2xl ${shadowColor} animate-violet-spectrum`}
                                 onError={(e) => (e.target.src = "/img/avat4r.png")}
                             />
-                        </div>
+                    </div>
                     );
                 })}
             </div>

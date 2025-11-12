@@ -68,11 +68,12 @@ export function AiChats() {
                         <X
                             className="mr-6 mt-4  hover:animate-spin cursor-pointer text-purple-400 hover:text-purple-500 transition-transform duration-300 hover:scale-110"
                             onClick={() => crossFunction(null)}
-                        />                </div>
+                        />                
+                        </div>
             </div>
 
             {/* Chat display */}
-            <div className="w-full  mb-4 p-4  border-purple-800 rounded-2xl h-[564px] overflow-y-scroll flex flex-col gap-2">
+            <div className="w-full  mb-4 p-4  border-purple-800 rounded-2xl     h-[400px] sm:h-[500px] md:h-[564px]  overflow-y-scroll flex flex-col gap-2">
                 {message.map((ele, index) => (
                     <div
                         key={index}

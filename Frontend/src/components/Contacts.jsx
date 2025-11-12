@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import ScrollAnimation from "./ScrollAnimation";
 
 export default function Contacts() {
     const [userData ,setData]=useState([]);
@@ -27,7 +28,7 @@ export default function Contacts() {
         <div >
         <h3 className="z-100 text-lg mb-2 text-violet-400 text-left p-0.2">My contacts</h3>
         </div>
-        <div className="h-160 overflow-y-scroll">
+        <ScrollAnimation className="h-160 rounded-2xl bg-transparent">
             <div className="h-full">{userData.length>0&&userData.map((ele, index) => (
                 <div className="mt-2 w-auto  rounded-2xl">
                     <div className=" cursor-pointer w-full h-min-auto flex justify-between gap-3 p-2 bg-slate-700 rounded-2xl contrast-150">
@@ -55,7 +56,7 @@ export default function Contacts() {
                 </div>
             ))}
             </div>
-        </div>
+        </ScrollAnimation>
         </>
     );
 }

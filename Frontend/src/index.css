@@ -319,3 +319,32 @@ body {
     animation: gradient 5s ease infinite;
   }
 }
+
+
+@keyframes violet-spectrum {
+  0%   { filter: hue-rotate(0deg) saturate(120%) brightness(110%); }       /* base violet */
+  10%  { filter: hue-rotate(20deg) saturate(140%) brightness(120%); }      /* purple-pink */
+  25%  { filter: hue-rotate(45deg) saturate(160%) brightness(125%); }      /* pink-magenta */
+  40%  { filter: hue-rotate(90deg) saturate(170%) brightness(120%); }      /* magenta → red tone */
+  55%  { filter: hue-rotate(150deg) saturate(180%) brightness(115%); }     /* red → orange glow */
+  70%  { filter: hue-rotate(200deg) saturate(160%) brightness(120%); }     /* orange → cyan-blue */
+  85%  { filter: hue-rotate(280deg) saturate(150%) brightness(115%); }     /* cyan → deep blue */
+  100% { filter: hue-rotate(360deg) saturate(120%) brightness(110%); }     /* back to violet */
+}
+
+.animate-violet-spectrum {
+  animation: violet-spectrum 16s ease-in-out infinite;
+}
+
+
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-content] {
+  will-change: transform;
+}
