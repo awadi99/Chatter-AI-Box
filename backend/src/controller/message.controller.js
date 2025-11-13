@@ -1,15 +1,10 @@
-import { response } from 'express';
 import cloudinary from '../lib/cloudinary.js';
 import MessageData from '../model/Message.js'
 import NewUser from '../model/User.js'
-import axios from 'axios';
 import dotenv from 'dotenv';
 import path from "path";
 import { fileURLToPath } from "url";
-import { InferenceClient } from "@huggingface/inference";
-
-
-
+import { GoogleGenAI } from "@google/genai";
 
 
 
@@ -62,16 +57,17 @@ export const getAllChats = async (req, res) => {
 }
 
 
-export const getChatProfile=async(req,res)=>{
-    try{
-        const {id}=req.params;
-        const chatProfile = await NewUser.findOne({_id:id}).select("-password");
-        if(!chatProfile){
-            return res.status(404).json({msg:"User not found"})
+export const getChatProfile = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const chatProfile = await NewUser.findOne({ _id: id }).select("-password");
+        if (!chatProfile) {
+            return res.status(404).json({ msg: "User not found" })
         }
-        res.status(200).json(chatProfile);    }catch(err){
+        res.status(200).json(chatProfile);
+    } catch (err) {
         console.error("Error in getChatProfile");
-        res.status(500).json({msg:"Internal server problem"});
+        res.status(500).json({ msg: "Internal server problem" });
     }
 }
 
@@ -123,41 +119,38 @@ export const sendMessage = async (req, res) => {
 }
 
 // set up ai google /gemma-2-2b-it
-const client = new InferenceClient(process.env.HF_TOKEN);
+
+
+const ai = new GoogleGenAI({
+    apiKey: process.env.GOOGLE_API_KEY,
+});
+
 export const sendReply = async (req, res) => {
     try {
         const { message } = req.body;
 
-        
-        if (!message) {
+        if (!message.trim()) {
             return res.status(400).json({ reply: "Please send a message." });
         }
 
-        let out = "";
-
-
-        const stream = await client.chatCompletionStream({
-            model: "google/gemma-2-2b-it", 
-            messages: [
+        const response = await ai.models.generateContent({
+            model: "gemini-2.0-flash",   
+            contents: [
                 {
                     role: "user",
-                    content: message,
+                    parts: [{ text: message }],
                 },
             ],
         });
 
-        
-        for await (const chunk of stream) {
-            if (chunk.choices && chunk.choices.length > 0) {
-                const newContent = chunk.choices[0].delta?.content || "";
-                out += newContent;
-            }
-        }
-        res.status(200).json({ reply: out || "Sorry, I didn’t understand that." });
+        const reply = response.text;
+        res.status(200).json({ reply });
 
-    } catch (error) {
-        console.error("HuggingFace Streaming Error:", error.message);
-        res.status(500).json({ reply: "AI error", details: error.message });
+    } catch (err) {
+        console.error("Chatter API Error:", err);
+        res.status(500).json({
+            reply: "AI error",
+            details: err.message,
+        });
     }
 };
-

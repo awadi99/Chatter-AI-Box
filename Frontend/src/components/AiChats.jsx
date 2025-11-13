@@ -18,27 +18,38 @@ export function AiChats() {
         SetText({ ...text, [name]: value });
     }
 
-    const sendValue = async (e) => {
-        e.preventDefault();
-        if (!text.message.trim()) return;
-
-        setMessage(prev => [...prev, { role: "user", content: text.message }]);
-        try {
-            const res = await axios.post("http://localhost:3000/api/messages/ai", {
-                message: text.message,
-            })
-            setMessage(prev => [...prev, { role: "ai", content: res.data.reply }]);
-            SetText({
-                message: ""
+const sendValue = async (e) => {
+    e.preventDefault();
+    if (!text.message.trim()) return;
+    setMessage(prev => [...prev, { role: "user", content: text.message }]);
+    const userMessage = text.message;
+    SetText({ message: "" });
+    try {
+        const res = await axios.post("http://localhost:3000/api/messages/ai", {
+            message: userMessage,
+        });
+        const reply = res.data.reply;
+        setMessage(prev => [...prev, { role: "ai", content: "" }]);
+        let index = 0;
+        const interval = setInterval(() => {
+            setMessage(prev => {
+                const updated = [...prev];
+                updated[updated.length - 1].content = reply.slice(0, index);
+                return updated;
             });
-            toast.success("Message sent!");
-            console.log(res.data.reply);
-        } catch (err) {
-            console.error(err);
-            toast.error(err.response?.data.reply || "something went wrong");
-        }
-    }
+            index++;
+            if (index > reply.length) {
+                clearInterval(interval);
+            }
+        }, 20); 
 
+        toast.success("Message sent!");
+
+    } catch (err) {
+        console.error(err);
+        toast.error(err.response?.data.reply || "something went wrong");
+    }
+};
     const dispatch = useDispatch();
     const crossFunction = (value) => {
         dispatch(setActive(value));
