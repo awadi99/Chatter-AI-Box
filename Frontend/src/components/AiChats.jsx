@@ -85,7 +85,7 @@ const sendValue = async (e) => {
                 {message.map((ele, index) => (
                     <div
                         key={index}
-                        className={` font-medium  h-auto p-3 rounded-2xl max-w-[70%] ${ele.role === "user"
+                        className={` font-medium  text-[22px] h-auto p-3 rounded-2xl max-w-[70%] ${ele.role === "user"
                             ? " text-purple-400 self-end"
                             : " text-purple-400 self-start"
                             }`}

@@ -100,7 +100,7 @@ function Input() {
                 {response.map((ele, index) => (
                     <div
                         key={index}
-                        className={`overflow-y-auto font-medium  h-auto p-3 rounded-2xl max-w-[100%] ${ele.role === "user"
+                        className={` text-[22px] overflow-y-auto font-medium  h-auto p-3 rounded-2xl max-w-[100%] ${ele.role === "user"
                             ? " text-purple-400 self-end"
                             : " text-purple-400 self-start"
                             }`}
