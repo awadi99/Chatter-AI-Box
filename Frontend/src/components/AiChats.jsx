@@ -42,9 +42,6 @@ const sendValue = async (e) => {
                 clearInterval(interval);
             }
         }, 20); 
-
-        toast.success("Message sent!");
-
     } catch (err) {
         console.error(err);
         toast.error(err.response?.data.reply || "something went wrong");
