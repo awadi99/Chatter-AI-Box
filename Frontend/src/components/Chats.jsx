@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
 import { setActive } from "../../redux/chatSlice.js";
 import { useDispatch } from "react-redux";
 import { getChatId } from "./../../redux/chatID.js";
 import ScrollAnimation from "./ScrollAnimation.jsx";
+import { showToast } from "./Notification_sound.jsx";
 
 export default function Chats() {
     const [chats, setChats] = useState([]);
@@ -25,7 +25,7 @@ export default function Chats() {
                 setChats(res.data);
             } catch (err) {
                 console.error("Error fetching chats:", err);
-                toast.error(err.response?.data?.msg || "Something went wrong");
+                showToast(err.response?.data?.msg || "Something went wrong","error");
             }
         };
         getChat();

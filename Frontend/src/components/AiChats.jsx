@@ -1,10 +1,13 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { toast, Zoom, ToastContainer } from 'react-toastify';
+import { Zoom, ToastContainer } from 'react-toastify';
 import { Send, X } from 'lucide-react';
 import { getChatId } from './../../redux/chatID.js'
 import { setActive } from './../../redux/chatSlice.js'
 import { useDispatch } from 'react-redux';
+import { showToast } from './Notification_sound.jsx';
+
+
 
 export function AiChats() {
     const [text, SetText] = useState({
@@ -42,9 +45,9 @@ const sendValue = async (e) => {
                 clearInterval(interval);
             }
         }, 20); 
-    } catch (err) {
-        console.error(err);
-        toast.error(err.response?.data.reply || "something went wrong");
+    } catch (error) {
+        console.error(error);
+        showToast(error.response?.data?.reply||"something went wrong","error");
     }
 };
     const dispatch = useDispatch();

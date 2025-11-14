@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { toast, Zoom, ToastContainer } from 'react-toastify';
+import { Zoom, ToastContainer } from 'react-toastify';
 import { Send, X } from 'lucide-react';
 import { getChatId } from './../../redux/chatID.js'
 import { setActive } from './../../redux/chatSlice.js'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { showToast } from './Notification_sound.jsx';
 
 
 function Input() {
@@ -40,7 +41,7 @@ function Input() {
             setResponse(res.data);
         } catch (err) {
             console.error(err);
-            toast.error(err.response?.data?.msg);
+            showToast(err.response?.data?.msg||"Internal server error","error");
         }
     }
 
@@ -52,7 +53,7 @@ function Input() {
             console.log("profile", res);
         } catch (err) {
             console.error(err);
-            toast.error(err.response?.data?.msg);
+            showToast(err.response?.data?.msg||" internal server problem","error");
         }
     }
     useEffect(() => {

@@ -6,6 +6,7 @@ import { toast, ToastContainer, Zoom } from "react-toastify";
 import { Link, useNavigate } from "react-router";
 import { LogOut, Volume2, VolumeOff } from "lucide-react";
 import { useState, useRef } from "react";
+import { showToast } from "./Notification_sound.jsx";
 
 function Profile() {
 
@@ -20,7 +21,7 @@ function Profile() {
         try {
             const res = await axios.post("http://localhost:3000/api/auth/logout");
             if (userLogin) {
-                toast.success("Logout Successful", {
+                toast.success("Logout Successful",{
                     onClose: () => navigate('/login')
                 });
             }
@@ -29,7 +30,7 @@ function Profile() {
 
         } catch (err) {
             console.error("server error", err);
-            toast.error("Server error");
+            showToast("Server error","error");
         }
     }
     const [Image, setImage] = useState(null);

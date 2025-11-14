@@ -8,6 +8,7 @@ import { Link } from 'react-router'
 import { useDispatch } from 'react-redux';
 import { login } from './../../redux/slice.js'
 import { useNavigate } from 'react-router';
+import { showToast } from '../components/Notification_sound.jsx';
 
 
 export default function SignUpPage() {
@@ -76,7 +77,7 @@ export default function SignUpPage() {
       if (res.ok) {
         localStorage.setItem("user", JSON.stringify(data));
 
-        toast.success(data.msg || "Signup successful!", {
+        showToast( data.msg||"Signup successful!","success", {
 
           onClose: () => navigate("/"),
         });
@@ -90,7 +91,7 @@ export default function SignUpPage() {
 
       } else {
         // If server sends a custom error message
-        toast.error(data.msg || "Signup failed. Please try again.");
+        showToast(data.msg || "Signup failed. Please try again.","error");
       }
 
     } catch (err) {

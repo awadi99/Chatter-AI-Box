@@ -1,6 +1,6 @@
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
-import { ToastContainer, toast, Zoom } from "react-toastify";
+import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Mail, KeyRound } from "lucide-react";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -8,6 +8,9 @@ import { Link, useNavigate } from "react-router";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login } from './../../redux/slice.js'
+import { showToast } from './../components/Notification_sound.jsx';
+
+
 export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -65,7 +68,7 @@ export default function LoginPage() {
 
       localStorage.setItem("user", JSON.stringify(res.data));
       dispatch(login(res.data));
-      toast.success("Login successful!", {
+      showToast("Login successful!","success", {
         onClose: () => navigate("/"),
       });
       setFormData({
@@ -74,11 +77,7 @@ export default function LoginPage() {
       });
     } catch (err) {
       console.error("Login error ", err);
-      if (err.response && err.response.data && err.response.data.msg) {
-        toast.error(err.response.data.msg);
-      } else {
-        toast.error("Server error, please try again later");
-      }
+      showToast(err.res?.data?.msg || "Invalid Credentials.","error");
     }
   };
   return (

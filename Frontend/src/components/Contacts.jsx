@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import ScrollAnimation from "./ScrollAnimation";
+import { showToast } from "./Notification_sound";
 
 export default function Contacts() {
     const [userData ,setData]=useState([]);
@@ -16,7 +16,7 @@ export default function Contacts() {
                 setData(res.data);
             } catch (err) {
                 console.error("Error fetching contacts:", err);
-                toast.error(err.response?.data?.msg || "Something went wrong");
+                showToast(err.response?.data?.msg || "Something went wrong","error");
             }
         };
 
