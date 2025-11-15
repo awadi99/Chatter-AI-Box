@@ -348,3 +348,24 @@ html.lenis {
 .lenis.lenis-smooth [data-lenis-content] {
   will-change: transform;
 }
+
+.apple-live {
+  padding: 12px 18px;
+  border-radius: 20px;
+  font-size: 16px;
+  line-height: 1.4;
+  color: white;
+  display: inline-block;
+  max-width: 100%;
+
+  /* LIVE gradient background */
+  background: linear-gradient(135deg, #ff4d4d, #6a5af9, #00d4ff);
+  background-size: 300% 300%;
+  animation: liveGradient 4s ease infinite;
+}
+
+@keyframes liveGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
