@@ -11,7 +11,6 @@ export default function Chats() {
     const dispatch = useDispatch();
     const data = JSON.parse(localStorage.getItem("user"));
     const id = data._id;
-    console.log(id);
     useEffect(() => {
         const getChat = async () => {
             try {
@@ -38,7 +37,6 @@ export default function Chats() {
 
     const sendActiveChatId = (useid) => {
         let a = dispatch(setActive("user"));
-        console.log(a);
         dispatch(getChatId(useid));
     };
 

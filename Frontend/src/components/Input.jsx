@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Zoom, ToastContainer } from 'react-toastify';
 import { Send, X } from 'lucide-react';
 import { getChatId } from './../../redux/chatID.js'
@@ -45,22 +45,25 @@ function Input() {
         }
     }
 
-    // get ChatProfile 
-    const [find,setFind ]=useState({id:""});
 
+
+
+    // get ChatProfile '
+    const [find, setFind] = useState([]);
     const getChatProfile = async () => {
         try {
             const res = await axios.get(`http://localhost:3000/api/messages/chats/${userid}`, {
                 withCredentials: true
             });
+            setFind({ id: res.data._id })
+            console.log("id =",res.data._id);
+
             setChatProfile(res.data);
-            setFind({id:res.data._id})
         } catch (err) {
             console.error(err);
             showToast(err.response?.data?.msg || " internal server problem", "error");
         }
     }
-        console.log(find);
     useEffect(() => {
         if (userid) {
             getMessage();
@@ -87,15 +90,15 @@ function Input() {
                 {
                     params: {
                         client: "gtx",
-                        sl: "auto",       
-                        tl: targetLang,     
+                        sl: "auto",
+                        tl: targetLang,
                         dt: "t",
                         q: text
-                    },withCredentials:false
+                    }, withCredentials: false
                 }
             );
 
-            return res.data[0][0][0]; 
+            return res.data[0][0][0];
 
         } catch (err) {
             console.error("Translation error:", err);
@@ -148,8 +151,9 @@ function Input() {
 
                         <div className='cursor-pointer fixed flex gap-3 justify-center items-center'>
                             <div className='apple-live bg-violet-600 inline-block px-6 py-4 text-lg font-medium'>
-                                {translate[index] ? translate[index] : ele.text}
-                                
+                                {
+                                        (translate[index] ? translate[index] : ele.text)
+                                }
                             </div>
                             <img
                                 src="/img/icon/icon-removebg-preview.png"
@@ -160,17 +164,17 @@ function Input() {
                             {items === index && (
                                 <div className="apple-live absolute z-20 bg-white shadow-lg rounded-xl p-2 flex flex-col gap-2 w-max max-w-[80vw] left-full ml-3 top-0 max-sm:left-0 max-sm:ml-0 max-sm:top-full max-sm:mt-2">
 
-                                    <div className="p-2 px-4 hover:bg-gray-200 cursor-pointer rounded-md"
+                                    <div className="p-2 px-4 hover:bg-gray-600 cursor-pointer rounded-md"
                                         onClick={() => handleTranslate(ele.text, 'mr', index)}>
                                         Marathi
                                     </div>
 
-                                    <div className="p-2 px-4 hover:bg-gray-200 cursor-pointer rounded-md"
+                                    <div className="p-2 px-4 hover:bg-gray-600 cursor-pointer rounded-md"
                                         onClick={() => handleTranslate(ele.text, 'hi', index)}>
                                         Hindi
                                     </div>
 
-                                    <div className="p-2 px-4 hover:bg-gray-200 cursor-pointer rounded-md"
+                                    <div className="p-2 px-4 hover:bg-gray-600 cursor-pointer rounded-md"
                                         onClick={() => handleTranslate(ele.text, 'en', index)}>
                                         English
                                     </div>
@@ -179,6 +183,7 @@ function Input() {
                         </div>
                     </div>
                 ))}
+                
             </div>
 
 
