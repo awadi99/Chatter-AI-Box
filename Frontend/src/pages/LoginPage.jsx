@@ -77,8 +77,7 @@ export default function LoginPage() {
       });
     } catch (err) {
       console.error("Login error ", err);
-      showToast(err.res?.data?.msg || "Invalid Credentials.","error");
-    }
+      showToast(err.response?.data?.msg || "Invalid Credentials.","error");    }
   };
   return (
     <div className="animate-border container w-auto p-12 md:p-12 flex justify-between items-center flex-wrap rounded-2xl z-10 bg-slate-950">

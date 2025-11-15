@@ -31,7 +31,6 @@ function Notification_sound() {
                 theme="dark"
                 transition={Zoom}
             />
-            <div>notification_Sound</div>
         </>
     )
 }
