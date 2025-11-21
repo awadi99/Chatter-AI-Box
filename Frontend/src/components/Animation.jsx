@@ -2,60 +2,39 @@ import "/src/index.css";
 
 const Animations = () => {
     const boxes = [
-
         { name: "fadein", className: "animate-fadein" },
         { name: "fadeout", className: "animate-fadeout" },
-
         { name: "fadeindown", className: "animate-fadeindown" },
         { name: "fadeinup", className: "animate-fadeinup" },
         { name: "fadeinleft", className: "animate-fadeinleft" },
         { name: "fadeinright", className: "animate-fadeinright" },
-
         { name: "fadeoutdown", className: "animate-fadeoutdown" },
         { name: "fadeoutup", className: "animate-fadeoutup" },
         { name: "fadeoutleft", className: "animate-fadeoutleft" },
         { name: "fadeoutright", className: "animate-fadeoutright" },
-
         { name: "fadeouttopleft", className: "animate-fadeouttopleft" },
         { name: "fadeouttopright", className: "animate-fadeouttopright" },
-
         { name: "fadeinup2", className: "animate-fadeinup" },
         { name: "fadeinleft2", className: "animate-fadeinleft" },
         { name: "fadeinright2", className: "animate-fadeinright" },
         { name: "fadeoutdown2", className: "animate-fadeoutdown" },
         { name: "fadeoutup2", className: "animate-fadeoutup" },
         { name: "fadeoutleft2", className: "animate-fadeoutleft" },
-        { name: "fadeoutright2", className: "animate-outright" },
+        { name: "fadeoutright2", className: "animate-fadeoutright" },
     ];
 
     const shadowColors = [
-        "shadow-red-500",
-        "shadow-blue-500",
-        "shadow-green-500",
-        "shadow-yellow-500",
-        "shadow-pink-500",
-        "shadow-purple-500",
-        "shadow-orange-500",
-        "shadow-cyan-500",
-        "shadow-lime-500",
-        "shadow-amber-500",
-        "shadow-emerald-500",
-        "shadow-violet-500",
-        "shadow-teal-500",
-        "shadow-rose-500",
-        "shadow-sky-500",
-        "shadow-indigo-500",
-        "shadow-fuchsia-500",
-        "shadow-gray-500",
-        "shadow-stone-500",
-        "shadow-neutral-500",
-        "shadow-zinc-500",
+        "shadow-red-500","shadow-blue-500","shadow-green-500","shadow-yellow-500",
+        "shadow-pink-500","shadow-purple-500","shadow-orange-500","shadow-cyan-500",
+        "shadow-lime-500","shadow-amber-500","shadow-emerald-500","shadow-violet-500",
+        "shadow-teal-500","shadow-rose-500","shadow-sky-500","shadow-indigo-500",
+        "shadow-fuchsia-500","shadow-gray-500","shadow-stone-500","shadow-neutral-500","shadow-zinc-500"
     ];
 
     return (
-        <div className="flex flex-col items-center justify-center w-full h-full relative">
+        <div className="flex flex-col items-center justify-center w-full h-full relative overflow-hidden">
 
-            {/* TITLE - unchanged */}
+            {/* Title (NO CHANGES) */}
             <div
                 className="absolute text-center text-3xl font-semibold tracking-wide top-6 z-20
                 bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 
@@ -64,15 +43,15 @@ const Animations = () => {
                 Chatter AI
             </div>
 
-            {/* GRID - only spacing increased */}
+            {/* Animation Grid (Same UI, More Space, No Overflow) */}
             <div
                 className="
                 grid 
-                grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6
+                grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 
                 gap-10 sm:gap-12 md:gap-14 lg:gap-16 
-                p-6 sm:p-8 md:p-10 
-                justify-items-center
+                p-6 sm:p-8 md:p-10
                 pt-20
+                justify-items-center
                 w-full max-w-7xl mx-auto
                 "
             >
