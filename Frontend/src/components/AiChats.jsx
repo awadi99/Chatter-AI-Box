@@ -32,7 +32,7 @@ export function AiChats() {
         const userMessage = text.message;
         SetText({ message: "" });
         try {
-            const res = await axios.post("http://localhost:3000/api/messages/ai", {
+            const res = await axios.post("https://chatter-ai-box-backend.onrender.com/api/messages/ai", {
                 message: userMessage,
             });
             const reply = res.data.reply;
