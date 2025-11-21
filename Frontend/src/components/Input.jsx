@@ -137,13 +137,13 @@ function Input() {
     }, [response]);
 
     return (
-        <div className="p-2 w-full flex flex-col justify-between h-[550px]">
+        <div className="p-2 w-full flex flex-col justify-between h-[600px]">
 
             {/* TOP PROFILE */}
             <MessageProfile />
 
             {/* CHAT MESSAGES AREA */}
-            <ScrollAnimation className="h-full mt-4 w-full p-4 border-purple-800 h-[599px] rounded-2xl">
+            <ScrollAnimation className="h-full mt-4 w-full p-4 border-purple-800 h-[600px] rounded-2xl">
                 <div className="flex flex-col gap-2">
                     {response.map(ele => (
                         <MessageBubble
