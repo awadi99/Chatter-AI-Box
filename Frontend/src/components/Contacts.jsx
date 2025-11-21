@@ -44,7 +44,7 @@ export default function Contacts() {
                 <h3 className="z-100 text-lg mb-2 text-violet-400 text-left p-0.2">My contacts</h3>
             </div>
 
-            <ScrollAnimation className="h-160 rounded-2xl bg-transparent">
+            <ScrollAnimation className="h-155 rounded-2xl bg-transparent">
                 <div className="h-full" onClick={setActive}>
                     {userData.length > 0 &&
                         userData.map((ele) => {
