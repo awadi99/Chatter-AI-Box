@@ -22,12 +22,12 @@ export default function ChatPage() {
   }, [user, navigate]);
 
   return (
-    <div className="animate-border w-full max-w-6xl min-h-auto mx-auto p-3">
+    <div className="animate-border w-full max-w-6xl min-h-auto mx-auto p-3 z-100">
 
       <div className="flex flex-col md:flex-row h-full gap-4">
 
         {/* LEFT SECTION */}
-        <div className="w-full md:w-[260px] flex flex-col gap-3">
+        <div className="w-full md:w-[310px] flex flex-col gap-3">
 
           <Profile />
 
