@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const socketServer = new Server(server, {
     cors: {
-        origin: 'http://localhost:5173',
+        origin: 'https://chatter-ai-box-frontend.onrender.com',
         credentials: true
     },
 });
