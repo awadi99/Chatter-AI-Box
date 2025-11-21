@@ -143,7 +143,7 @@ function Input() {
             <MessageProfile />
 
             {/* CHAT MESSAGES AREA */}
-            <ScrollAnimation className="h-full mt-4 w-full p-4 border-purple-800 h-[480px] rounded-2xl overflow-y-auto">
+            <ScrollAnimation className="h-full mt-4 w-full p-4 border-purple-800 h-[700px] rounded-2xl">
                 <div className="flex flex-col gap-2">
                     {response.map(ele => (
                         <MessageBubble
