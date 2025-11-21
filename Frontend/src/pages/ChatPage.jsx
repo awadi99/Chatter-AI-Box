@@ -27,7 +27,7 @@ export default function ChatPage() {
       <div className="flex flex-col md:flex-row h-full gap-4">
 
         {/* LEFT SECTION */}
-        <div className="w-full md:w-[260px] flex flex-col gap-3">
+        <div className="w-full md:w-[300px] flex flex-col gap-3">
 
           <Profile />
 
