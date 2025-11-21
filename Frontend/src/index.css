@@ -1,0 +1,371 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-poppins: "Poppins", sans-serif;
+}
+
+body {
+  font-family: var(--font-poppins);
+}
+
+
+@plugin "daisyui";
+
+@layer utilities {
+  .animate-gradient-diagonal {
+    background: linear-gradient(45deg,
+        oklch(25% 0.288 302.321),
+        oklch(20% 0.195 277.366),
+        oklch(20% 0.153 2.432),
+        oklch(18% 0.189 293.745),
+        oklch(18% 0.176 304.987));
+    background-size: 400% 400%;
+    animation: gradientDiagonal 12s ease infinite;
+  }
+
+  @keyframes gradientDiagonal {
+    0% {
+      background-position: 0% 0%;
+    }
+
+    50% {
+      background-position: 100% 100%;
+    }
+
+    100% {
+      background-position: 0% 0%;
+    }
+  }
+}
+
+
+/* moving border css */
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes rotateBorder {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+
+:root {
+  --border-angle: 0deg;
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes borderRotate {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+.animate-border {
+  background:
+    linear-gradient(45deg, #172033, rgb(30 41 59 / 1) 50%, #172033) padding-box,
+    conic-gradient(from var(--border-angle),
+      rgb(71 85 105 / 0.48) 80%,
+      rgb(99 102 241) 86%,
+      rgb(165 180 252) 90%,
+      rgb(99 102 241) 94%,
+      rgb(71 85 105 / 0.48)) border-box;
+  border: 3px solid transparent;
+  border-radius: 1rem;
+  animation: borderRotate 4s linear infinite;
+  transition: all 0.3s ease-in-out;
+}
+
+
+.Toastify__toast {
+  font-size: 0.85rem !important;
+  /* smaller text */
+  padding: 7px 10px !important;
+  /* smaller padding */
+  min-height: 50px !important;
+  /* smaller height */
+}
+
+.Toastify__toast-container {
+  width: auto !important;
+  /* auto width */
+  max-width: 265px !important;
+  /* limit width */
+}
+
+/* .Toastify__toast {
+  border-radius: 8px !important;
+  font-size: 0.8rem !important;
+  padding: 4px 8px !important;
+} */
+.container {
+  margin: auto auto;
+}
+
+
+
+@layer utilities {
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+
+  }
+
+  @keyframes fade-in-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-left {
+    0% {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fade-in-right {
+    0% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fade-out-down {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+  }
+
+  @keyframes fade-out-up {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+  }
+
+  @keyframes fade-out-left {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes fade-out-right {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes fade-out-top-left {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translate(-100%, -100%);
+    }
+  }
+
+  @keyframes fade-out-top-right {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translate(100%, -100%);
+    }
+  }
+
+  .animate-fadein {
+    animation: fade-out-down 8s ease-in-out infinite;
+  }
+
+  .animate-fadeout {
+    animation: fade-out-down 8s ease-in-out infinite;
+  }
+
+  .animate-fadeindown {
+    animation: fade-out-down 8s ease-in-out infinite;
+  }
+
+  .animate-fadeinup {
+    animation: fade-in-up 8s ease-in-out infinite;
+  }
+
+  .animate-fadeinleft {
+    animation: fade-in-left 8s ease-in-out infinite;
+  }
+
+  .animate-fadeinright {
+    animation: fade-out-down 8s ease-in-out infinite;
+  }
+
+  .animate-fadeoutdown {
+    animation: fade-out-down 8s ease-in-out infinite;
+  }
+
+  .animate-fadeoutup {
+    animation: fade-out-up 8s ease-in-out infinite;
+  }
+
+  .animate-fadeoutleft {
+    animation: fade-out-left 8s ease-in-out infinite;
+  }
+
+  .animate-fadeoutright {
+    animation: fade-out-right 8s ease-in-out infinite;
+  }
+
+  .animate-fadeouttopleft {
+    animation: fade-out-top-left 8s ease-in-out infinite;
+  }
+
+  .animate-fadeouttopright {
+    animation: fade-out-top-left 9s ease-in-out infinite;
+  }
+
+
+}
+
+@layer utilities {
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-gradient {
+    animation: gradient 5s ease infinite;
+  }
+}
+
+
+@keyframes violet-spectrum {
+  0%   { filter: hue-rotate(0deg) saturate(120%) brightness(110%); }       /* base violet */
+  10%  { filter: hue-rotate(20deg) saturate(140%) brightness(120%); }      /* purple-pink */
+  25%  { filter: hue-rotate(45deg) saturate(160%) brightness(125%); }      /* pink-magenta */
+  40%  { filter: hue-rotate(90deg) saturate(170%) brightness(120%); }      /* magenta → red tone */
+  55%  { filter: hue-rotate(150deg) saturate(180%) brightness(115%); }     /* red → orange glow */
+  70%  { filter: hue-rotate(200deg) saturate(160%) brightness(120%); }     /* orange → cyan-blue */
+  85%  { filter: hue-rotate(280deg) saturate(150%) brightness(115%); }     /* cyan → deep blue */
+  100% { filter: hue-rotate(360deg) saturate(120%) brightness(110%); }     /* back to violet */
+}
+
+.animate-violet-spectrum {
+  animation: violet-spectrum 16s ease-in-out infinite;
+}
+
+
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-content] {
+  will-change: transform;
+}
+
+.apple-live {
+  padding: 12px 18px;
+  border-radius: 20px;
+  font-size: 16px;
+  line-height: 1.4;
+  color: white;
+  display: inline-block;
+  max-width: 100%;
+
+  /* LIVE gradient background */
+  background: linear-gradient(135deg, #ff4d4d, #6a5af9, #00d4ff);
+  background-size: 300% 300%;
+  animation: liveGradient 4s ease infinite;
+}
+
+@keyframes liveGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
