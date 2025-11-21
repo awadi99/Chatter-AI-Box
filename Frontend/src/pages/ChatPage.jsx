@@ -22,7 +22,7 @@ export default function ChatPage() {
   }, [user, navigate]);
   const Activity = useSelector((state) => state.Activity.activity);
   return (
-    <div className="animate-border relative w-full max-w-6xl h-210  mx-auto p-2">
+    <div className="animate-border relative w-full max-w-6xl h-210  mx-auto p-3">
       <div className="flex flex-col md:flex-row h-full ">
 
         {/* Left Section */}
