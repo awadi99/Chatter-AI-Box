@@ -19,7 +19,7 @@ export default function Contacts() {
     useEffect(() => {
         const getContacts = async () => {
             try {
-                const res = await axios.get("http://localhost:3000/api/messages/contacts");
+                const res = await axios.get("https://chatter-ai-box-backend.onrender.com/api/messages/contacts");
                 setData(res.data);
             } catch (err) {
                 showToast(err.response?.data?.msg || "Something went wrong", "error");
