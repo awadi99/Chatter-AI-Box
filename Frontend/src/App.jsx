@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router";
 import ChatPage from "./pages/ChatPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
-import AuthOnline from "./components/authOnline";
+import AuthOnline from "./components/AuthOnline";
 function App() {
   return (
     <>
