@@ -16,7 +16,7 @@ export default function MessageProfile() {
 
     const getChatProfile = async () => {
         try {
-            const res = await axios.get(`http://localhost:3000/api/messages/chats/${userid}`, {
+            const res = await axios.get(`https://chatter-ai-box-backend.onrender.com/api/messages/chats/${userid}`, {
                 withCredentials: true
             });
             setChatProfile(res.data);
