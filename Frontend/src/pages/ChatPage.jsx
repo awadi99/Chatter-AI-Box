@@ -73,7 +73,7 @@ export default function ChatPage() {
         </div>
 
         {/* Right Section */}
-        <div className="p-4 h-full w-full md:w-[950px] flex flex-col justify-center">
+        <div className="p-4 h-full  md:w-[950px] flex flex-col justify-center">
           <div>
             {active === "chats" && Activity === "ai" ? (
               <AiChats />
