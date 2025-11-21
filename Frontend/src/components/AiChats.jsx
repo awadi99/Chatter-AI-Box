@@ -67,7 +67,7 @@ export function AiChats() {
 
     return (
         <>
-            <div className='h-[775px] w-full'>
+            <div className='h-[775px] w-full p-2 '>
                 <div
                     className={` p-3 mt-2 w-full rounded-2xl cursor-pointer text-violet-400
                     transition-all hover:text-purple-500`}
