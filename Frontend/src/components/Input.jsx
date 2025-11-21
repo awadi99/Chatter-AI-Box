@@ -1,215 +1,119 @@
-import axios from 'axios';
-import { useEffect, useState, useRef } from 'react';
-import { Zoom, ToastContainer } from 'react-toastify';
-import { Send, X } from 'lucide-react';
-import { useSelector } from 'react-redux';
-import { toggleSound } from '../../redux/soundSlice.js';
-import { showToast } from './Notification_sound.jsx';
-import useKeyboardSound from '../../hook/useSoundHook.jsx';
-import MessageProfile from './MessageProfile.jsx';
-import MessageBubble from './MessageBubble.jsx';
-import ScrollAnimation from './ScrollAnimation.jsx';
-import MultiMedia from './MultiMedia.jsx';
-import { socket } from '../socket.js';
+import { ToastContainer, Zoom } from "react-toastify";
+import Profile from "../components/Profile.jsx";
+import Contacts from "../components/Contacts.jsx";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import Chats from "../components/Chats.jsx";
+import Input from "../components/Input.jsx";
+import { AiChats } from "../components/AiChats.jsx";
+import Animations from "../components/Animation.jsx";
 
-function Input() {
-    const userid = useSelector((state) => state.chatId.userId);
-    const isSoundEnabled = useSelector((state)=>state.sound.isSoundEnabled);
+export default function ChatPage() {
+  const user = useSelector((state) => state.auth.isLoggedIn);
+  const navigate = useNavigate();
+  const [active, setAct] = useState("contacts");
+  const Activity = useSelector((state) => state.Activity.activity);
 
-    const { playRandomKeyStrokeSound } = useKeyboardSound();
-
-    const [text, SetText] = useState({ message: "" });
-    const [response, setResponse] = useState([]);
-
-    const [imagePreview, setImagePreview] = useState(null);
-    const [selectedImageBase64, setSelectedImageBase64] = useState(null);
-
-    const bottomRef = useRef(null);
-
-
-    const playReceiveSound=()=>{
-        if(!isSoundEnabled)return;
-        const s= new Audio("/sound/notification.mp3");
-        s.play().catch(()=>{});
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
     }
+  }, [user, navigate]);
 
-    const handleValue = (event) => {
-        const { name, value } = event.target;
-        SetText({ ...text, [name]: value });
-        if(isSoundEnabled){
-        playRandomKeyStrokeSound();
-        }
-    };
+  return (
+    <div className="animate-border w-full max-w-6xl min-h-screen mx-auto p-3 z-100">
 
-    const sendValue = async (e) => {
-        e.preventDefault();
-        try {
-            if (!text.message.trim() && !selectedImageBase64) return;
+      <div className="flex flex-col md:flex-row h-full gap-4">
 
-            const res = await axios.post(
-                `https://chatter-ai-box-backend.onrender.com/api/messages/send/${userid}`,
-                {
-                    text: text.message,
-                    image: selectedImageBase64
-                },
-                { withCredentials: true }
-            );
+        {/* LEFT SECTION */}
+        <div className="w-full md:w-[310px] flex flex-col gap-3 z-50">
 
-            socket.emit("sendMessage", res.data);
+          <Profile />
 
-            SetText({ message: "" });
-            setImagePreview(null);
-            setSelectedImageBase64(null);
+          {/* Toggle Buttons */}
+          <div className="flex gap-3 relative z-50 pointer-events-auto">
+            <button
+              onClick={() => setAct("contacts")}
+              className={`w-full border text-sm font-medium px-3 py-2 rounded-2xl text-center transition-all
+              ${active === "contacts"
+                  ? "bg-violet-500 text-white"
+                  : "border-violet-500 text-violet-400"
+                } hover:bg-violet-600 hover:text-white`}
+            >
+              Contacts
+            </button>
 
-        } catch (err) {
-            console.error(err);
-            showToast("Error sending message", "error");
-        }
-    };
+            <button
+              onClick={() => setAct("chats")}
+              className={`w-full border text-sm font-medium px-3 py-2 rounded-2xl text-center transition-all
+              ${active === "chats"
+                  ? "bg-violet-500 text-white"
+                  : "border-violet-500 text-violet-400"
+                } hover:bg-violet-600 hover:text-white`}
+            >
+              Chats
+            </button>
+          </div>
 
-    const getMessage = async () => {
-        try {
-            const res = await axios.get(
-                `https://chatter-ai-box-backend.onrender.com/api/messages/${userid}`,
-                { withCredentials: true }
-            );
-            setResponse(res.data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-    useEffect(() => {
-        if (userid) getMessage();
-    }, [userid]);
+          {/* Scrollable Content */}
+          <div className="flex-1 overflow-y-auto pr-1">
+            {active === "contacts" ? <Contacts /> : <Chats />}
+          </div>
 
-    
-    useEffect(() => {
-        if (!userid) return;
+        </div>
 
-        const HandleNewMessage =((msg) => {
-            const myId = String(userid);
-            const sender = String(msg.senderId);
-            const receiver = String(msg.receiverId);
-            if (sender === myId || receiver === myId) {
-                setResponse(prev => [...prev, msg]);
-                playReceiveSound();
-            }
-        });
+        {/* MIDDLE SECTION */}
+        <div className="hidden md:flex items-start justify-center px-2">
+          <ToastContainer
+            position="top-center"
+            autoClose={1000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            transition={Zoom}
+          />
+        </div>
 
-        socket.on("newMessage",HandleNewMessage);
-        return () => {
-            socket.off("newMessage");
-        };
-    }, [userid,isSoundEnabled]);
+        {/* RIGHT SECTION */}
+        <div className="flex-1 overflow-hidden">
 
-    const [items, setItems] = useState();
-    const [translate, setTranslate] = useState({});
-    const [show, setShow] = useState(null);
+          <div
+            className={`
+              w-full md:w-[900px] lg:w-[950px]
+              min-h-[600px] md:min-h-[650px]
+              relative overflow-hidden
 
-    const translateText = async (text, targetLang) => {
-        try {
-            const res = await axios.get(
-                "https://translate.googleapis.com/translate_a/single",
-                {
-                    params: {
-                        client: "gtx",
-                        sl: "auto",
-                        tl: targetLang,
-                        dt: "t",
-                        q: text
-                    },
-                    withCredentials: false
-                }
-            );
-            return res.data[0][0][0];
-        } catch {
-            showToast("Translation failed", "error");
-            return "";
-        }
-    };
+              ${
+                active === "chats" &&
+                (Activity === "ai" || Activity === "user" || Activity === "Contact")
+                  ? "flex flex-col justify-between items-start p-4"
+                  : "flex justify-center items-center"
+              }
+            `}
+          >
 
-    const handleTranslate = async (text, lang, ele) => {
-        setTranslate(prev => ({ ...prev, [ele._id]: "Translating..." }));
-        const output = await translateText(text, lang);
-        setTranslate(prev => ({ ...prev, [ele._id]: output }));
-        setItems(null);
-    };
+            {active === "chats" && Activity === "ai" ? (
+              <AiChats />
+            ) : active === "chats" && Activity === "user" ? (
+              <Input />
+            ) : active === "contacts" && Activity === "Contact" ? (
+              <Input />
+            ) : (
+              <Animations />
+            )}
 
-    useEffect(() => {
-        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, [response]);
+          </div>
 
-    return (
-        <>
-            <MessageProfile />
-            <ScrollAnimation className="mt-4 w-full mb-4 p-4 border-purple-800 h-[550px] rounded-2xl">
-                <div className="flex flex-col gap-2">
-                    {response.map(ele => (
-                        <MessageBubble
-                            key={ele._id}
-                            ele={ele}
-                            translate={translate}
-                            show={show}
-                            setShow={setShow}
-                            items={items}
-                            setItems={setItems}
-                            handleTranslate={handleTranslate}
-                        />
-                    ))}
-                    <div ref={bottomRef}></div>
-                </div>
-            </ScrollAnimation>
+        </div>
 
-            <div className="mt-24 relative">
-                {imagePreview && (
-                    <div className="absolute -top-28 left-4 w-fit shadow-2xl shadow-violet-600">
-                        <img
-                            src={imagePreview}
-                            className="w-24 h-24 rounded-xl object-cover border-2 border-purple-500 shadow-lg"
-                        />
-                        <button
-                            onClick={() => {
-                                setImagePreview(null);
-                                setSelectedImageBase64(null);
-                            }}
-                            className="absolute -top-2 -right-2 bg-purple-600 text-white rounded-full p-1 hover:bg-red-600"
-                        >
-                            <X size={14} />
-                        </button>
-                    </div>
-                )}
+      </div>
 
-                <form onSubmit={sendValue}>
-                    <div className="flex flex-row items-center justify-between text-[20px] w-full px-5 py-2 min-h-[40px] rounded-2xl border border-violet-500 text-violet-400">
-                        <input
-                            type="text"
-                            placeholder="Type your message"
-                            className="w-full text-[20px] font-medium px-2 bg-transparent border-none focus:outline-none"
-                            value={text.message}
-                            name="message"
-                            onChange={handleValue}
-                        />
-                        <div className="mr-2">
-                            <MultiMedia
-                                imagePreview={imagePreview}
-                                setImagePreview={setImagePreview}
-                                setSelectedImageBase64={setSelectedImageBase64}
-                            />
-                        </div>
-                        <button
-                            className={`hover:text-purple-600 transition ${text.message || selectedImageBase64 ? "animate-pulse text-purple-500" : "text-gray-500"}`}
-                            type="submit"
-                            disabled={!text.message && !selectedImageBase64}
-                        >
-                            <Send size={22} />
-                        </button>
-                    </div>
-                </form>
-
-                <ToastContainer position="top-center" autoClose={1000} theme="dark" transition={Zoom} />
-            </div>
-        </>
-    );
+    </div>
+  );
 }
-
-export default Input;
