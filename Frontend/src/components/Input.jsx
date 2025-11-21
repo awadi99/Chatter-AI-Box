@@ -47,7 +47,7 @@ function Input() {
             if (!text.message.trim() && !selectedImageBase64) return;
 
             const res = await axios.post(
-                `http://localhost:3000/api/messages/send/${userid}`,
+                `https://chatter-ai-box-backend.onrender.com/api/messages/send/${userid}`,
                 {
                     text: text.message,
                     image: selectedImageBase64
@@ -70,7 +70,7 @@ function Input() {
     const getMessage = async () => {
         try {
             const res = await axios.get(
-                `http://localhost:3000/api/messages/${userid}`,
+                `https://chatter-ai-box-backend.onrender.com/api/messages/${userid}`,
                 { withCredentials: true }
             );
             setResponse(res.data);
