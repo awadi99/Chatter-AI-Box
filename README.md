@@ -1,73 +1,105 @@
-<img src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png" width="40" /> Chatter AI Box
+# <img src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png" width="40" /> Chatter AI Box
 
-Chatter AI Box is a real-time chat application built using the MERN stack, featuring AI-powered messaging, live translation, image sharing, secure JWT authentication, and email invitations using Resend.
+Chatter AI Box is a real-time chat application built using the MERN stack.  
+It supports AI-powered messaging, real-time translation, image sharing, JWT authentication, and email invitations.
 
-Installation
+## 🚀 Installation
 
-Clone the project and install all dependencies for backend and frontend.
+Clone the project and install all dependencies.
 
+```bash
 git clone https://github.com/awadi99/Chatter-Ai-Box.git
+```
 
-Backend
+## 🔗 Live Demo
+**👉 Try the Live App:** 
+```bash
+https://chatter-ai-box-frontend.onrender.com/
+```
+
+
+## ⚙️ Backend Setup
+```bash
 cd backend
 npm install
 npm start
-
-Frontend
+```
+## 💻 Frontend Setup
+```bash
 cd frontend
 npm install
 npm run dev
+```
 
-Usage
-• Real-time chat using Socket.io
-• AI assistant replies inside chat (Chatter AI)
-• Real-time language translation
-• Send & receive images
-• Secure login/signup using JWT
-• Create private & group chats
-• User search and contact system
-• Email invitations using Resend
-• MongoDB storage for users, chats & messages
+## ✨ Features
 
-Folder Structure
+💬 Real-time chat using Socket.io
+Messages update instantly without refresh.
+
+🤖 AI Chatbot (Chatter AI Integration)
+Ask questions inside chat and get smart AI responses.
+
+🌍 Real-time Translation
+Messages automatically translate to the user's selected language.
+
+🖼️ Image Sharing
+Users can upload and send images in chats.
+
+🔐 JWT Authentication
+Secure login/signup using token-based authentication.
+
+👥 Group Chat Features
+Create groups, add members, and remove members.
+
+✉️ Email Invitations (Resend)
+Invite users to join via email invite link.
+
+
+
+
+## 📂 Folder Structure
+```bash
 backend/
  └── src/
-      ├── config/
-      ├── controllers/
-      ├── middleware/
-      ├── models/
-      ├── routes/
-      └── index.js
+      ├── config/          # DB connection, cloudinary, jwt
+      ├── controllers/     # All backend logic
+      ├── middleware/      # Auth and validation middleware
+      ├── models/          # MongoDB schemas
+      ├── routes/          # API routes
+      └── index.js         # Entry point
 
 frontend/
  └── src/
-      ├── components/
-      ├── pages/
-      ├── redux/
-      ├── hook/
-      ├── assets/
-      └── main.jsx
+      ├── components/      # UI components
+      ├── pages/           # Main screens (Login, ChatPage, GroupPage)
+      ├── redux/           # Store & slices
+      ├── hook/            # Custom hooks (sounds, auth)
+      ├── assets/          # Images/icons
+      └── main.jsx         # React entry file
+```
 
-Environment Variables
+## 📄 License
 
-Create a .env file inside backend/:
+MIT License
 
-MONGO_URI=your_mongodb_url
-JWT_SECRET=your_secret
-CHATTER_AI_KEY=your_api_key
-RESEND_API_KEY=your_resend_key
-CLOUDINARY_CLOUD_NAME=xxxx
-CLOUDINARY_API_KEY=xxxx
-CLOUDINARY_API_SECRET=xxxx
-CLIENT_URL=http://localhost:5173
+Copyright (c) 2025 aditya waghmare
 
-Contributing
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Pull requests are welcome.
-For major updates, create an issue first to discuss what you would like to change.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-Please update any related logic or tests where appropriate.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-License
 
-MIT
