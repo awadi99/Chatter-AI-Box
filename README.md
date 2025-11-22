@@ -1,152 +1,73 @@
-📦 Chatter AI Box
+<img src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png" width="40" /> Chatter AI Box
 
-A real-time chat application built using the MERN stack, integrated with Chatter AI, live message translation, JWT authentication, and email invitations using Resend.
+Chatter AI Box is a real-time chat application built using the MERN stack, featuring AI-powered messaging, live translation, image sharing, secure JWT authentication, and email invitations using Resend.
 
-🚀 Features
-🔥 Real-Time Messaging
+Installation
 
-Built using Socket.io
+Clone the project and install all dependencies for backend and frontend.
 
-Messages update instantly without refresh
-
-Typing indicators, online/offline status
-
-🤖 Chatter AI Integration
-
-Ask any question inside chat
-
-Smart AI-generated responses
-
-Helpful for productivity, coding, learning, etc.
-
-🌍 Live Message Translation
-
-Every user can choose their preferred language
-
-Messages automatically translate in real time
-
-Great for friends/team chatting across different languages
-
-🔐 Secure Authentication
-
-JWT Token-based login & registration
-
-Password hashing using bcrypt
-
-Refresh token mechanism
-
-Protected backend routes
-
-✉️ Email Invitation System
-
-Invite users via email
-
-Integrated with Resend API
-
-Beautiful invite templates
-
-Accept/Reject invitation system
-
-📁 Chat & Contact Management
-
-Create chats and groups
-
-Search users
-
-Add/remove members
-
-Unread message counts
-
-💻 Tech Stack
-
-Frontend:
-
-React.js
-
-Redux Toolkit
-
-Axios
-
-Tailwind CSS
-
-Socket.io Client
-
-Backend:
-
-Node.js
-
-Express.js
-
-MongoDB (Mongoose)
-
-JWT Authentication
-
-Socket.io
-
-Other Integrations:
-
-Resend (Email invites)
-
-Chatter AI API
-
-Cloudinary (optional for media uploads)
-
-📂 Project Structure
-Chatter-Ai-Box/
- ├── client/        # React frontend
- ├── server/        # Node/Express backend
- ├── .env           # Environment variables
- ├── README.md
- └── package.json
-
-⚙️ Installation & Setup
-1️⃣ Clone the Repository
 git clone https://github.com/awadi99/Chatter-Ai-Box.git
-cd Chatter-Ai-Box
 
-2️⃣ Install Backend Dependencies
-cd server
+Backend
+cd backend
 npm install
-
-3️⃣ Install Frontend Dependencies
-cd ../client
-npm install
-
-🔧 Environment Variables
-
-Create a .env file inside server/:
-
-MONGO_URI=your_mongodb_url
-JWT_SECRET=your_jwt_secret
-RESEND_API_KEY=your_resend_key
-CHATTER_AI_KEY=your_chatter_ai_key
-CLIENT_URL=http://localhost:5173
-
-▶️ Run the App
-Start Backend:
-cd server
 npm start
 
-Start Frontend:
-cd client
+Frontend
+cd frontend
+npm install
 npm run dev
 
-🧪 Future Improvements
+Usage
+• Real-time chat using Socket.io
+• AI assistant replies inside chat (Chatter AI)
+• Real-time language translation
+• Send & receive images
+• Secure login/signup using JWT
+• Create private & group chats
+• User search and contact system
+• Email invitations using Resend
+• MongoDB storage for users, chats & messages
 
-Voice messages
+Folder Structure
+backend/
+ └── src/
+      ├── config/
+      ├── controllers/
+      ├── middleware/
+      ├── models/
+      ├── routes/
+      └── index.js
 
-Video/Audio calling
+frontend/
+ └── src/
+      ├── components/
+      ├── pages/
+      ├── redux/
+      ├── hook/
+      ├── assets/
+      └── main.jsx
 
-Dark/Light theme switch
+Environment Variables
 
-Chat backup & export
+Create a .env file inside backend/:
 
-AI summarization for chats
+MONGO_URI=your_mongodb_url
+JWT_SECRET=your_secret
+CHATTER_AI_KEY=your_api_key
+RESEND_API_KEY=your_resend_key
+CLOUDINARY_CLOUD_NAME=xxxx
+CLOUDINARY_API_KEY=xxxx
+CLOUDINARY_API_SECRET=xxxx
+CLIENT_URL=http://localhost:5173
 
-🤝 Contributing
+Contributing
 
-Pull requests are welcome! Open an issue for suggestions or bugs.
+Pull requests are welcome.
+For major updates, create an issue first to discuss what you would like to change.
 
-📜 License
+Please update any related logic or tests where appropriate.
 
-MIT License – free to use, modify, and distribute.
+License
+
+MIT
